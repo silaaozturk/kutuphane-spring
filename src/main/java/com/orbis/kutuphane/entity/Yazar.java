@@ -20,6 +20,7 @@ public class Yazar {
     private String soyad;
 
     @OneToMany(mappedBy = "yazar")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Kitaplar> kitaplar;
 
 }

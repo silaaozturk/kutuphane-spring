@@ -18,6 +18,7 @@ public class YayinEvi {
     private String ad;
     private String adres;
 
-    @OneToMany(mappedBy = "yayinevi") // Kitaplar sınıfındaki değişken adı 'yayinevi' ise böyle olmalı
+    @OneToMany(mappedBy = "yayinevi")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Kitaplar> kitaplar;
 }

@@ -32,5 +32,6 @@ public class Kullanici {
     @Enumerated(EnumType.ORDINAL)
     private GENEL.Rol rol;
 
+    @Column(name = "yasakli")
     private boolean yasakli = false;
 }

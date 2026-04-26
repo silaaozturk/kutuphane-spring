@@ -27,6 +27,10 @@ public class Kitaplar {
     @JoinColumn(name = "yayinevleri")
     private YayinEvi yayinevi;
 
+    @ManyToOne
+    @JoinColumn(name = "sube_id")
+    private Sube sube;
+
     private int sayfaSayisi;
 
 }

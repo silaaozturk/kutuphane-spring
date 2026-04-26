@@ -43,4 +43,15 @@ public class KullaniciService {
 
             return kullaniciRepo.save(kullanici);
         }
+
+        public Kullanici girisYap(String eposta, String sifre) {
+            Kullanici kullanici = kullaniciRepo.findByEpostaAndSifre(eposta, sifre)
+                    .orElseThrow(() -> new RuntimeException("E-posta veya şifre hatalı!"));
+
+            if (kullanici.isYasakli()) {
+                throw new RuntimeException("Hesabınız yasaklanmıştır! Lütfen kütüphane yönetimi ile iletişime geçin.");
+            }
+
+            return kullanici;
+        }
 }

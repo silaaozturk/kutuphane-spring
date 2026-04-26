@@ -29,8 +29,8 @@ public class KullaniciController {
 
     @PostMapping("/giris")
     public GirisResponse girisYap(@RequestBody GirisRequest istek) {
-        Kullanici uye = kullaniciRepo.findByEpostaAndSifre(istek.getEposta(), istek.getSifre())
-                .orElseThrow(() -> new RuntimeException("E-posta veya şifre hatalı!"));
+        Kullanici uye = kullaniciService.girisYap(istek.getEposta(), istek.getSifre());
+
         return new GirisResponse(uye.getAd(), uye.getSoyad(),uye.getId(), (int) uye.getRol().ordinal(), "Giriş başarılı.");
     }
 

@@ -1,16 +1,15 @@
 package com.orbis.kutuphane.repository;
 
-import com.orbis.kutuphane.GENEL;
 import com.orbis.kutuphane.entity.KitapKopya;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface KitapKopyaRepo extends JpaRepository<KitapKopya, Long> {
 
-    // Müsait olan kopyaları getir
-    List<KitapKopya> findByDurum(GENEL.KitapDurum durum);
+    List<KitapKopya> findByMusaitAdetGreaterThan(int musaitAdet);
 
     // Belirli kitabın müsait kopyaları
-    List<KitapKopya> findByKitapIdAndDurum(Long kitapId, GENEL.KitapDurum durum);
+    Optional<KitapKopya> findByIdAndMusaitAdetGreaterThan(Long kitapId, int adet);
 }

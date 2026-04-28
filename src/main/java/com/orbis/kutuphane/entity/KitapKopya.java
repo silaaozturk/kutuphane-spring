@@ -1,5 +1,4 @@
 package com.orbis.kutuphane.entity;
-
 import com.orbis.kutuphane.GENEL;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,6 +18,12 @@ public class KitapKopya {
 
     private boolean mevcut;
 
+    private int adet;
+
+    private int musaitAdet;
+
+    private int oduncteAdet;
+
     @ManyToOne
     @JoinColumn(name = "kitap_id")
     private Kitaplar kitap;
@@ -27,6 +32,4 @@ public class KitapKopya {
     @JoinColumn(name = "sube_id")
     private Sube sube;
 
-    @Enumerated(EnumType.STRING)
-    private GENEL.KitapDurum durum;
 }

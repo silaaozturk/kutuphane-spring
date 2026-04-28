@@ -1,44 +1,47 @@
 package com.orbis.kutuphane.controller;
 
+import com.orbis.kutuphane.dto.request.RezerveRequest;
 import com.orbis.kutuphane.entity.Odunc;
 import com.orbis.kutuphane.service.OduncService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/odunc")
+@AllArgsConstructor
 public class OduncController {
 
     private final OduncService oduncService;
 
-    public OduncController(OduncService oduncService) {
-        this.oduncService = oduncService;
-    }
 
-    // 📌 Kitap kirala
-    @PostMapping("/kirala")
-    public Odunc kirala(
-            @RequestParam Long kullaniciId,
-            @RequestParam Long kitapKopyaId,
-            @RequestParam int gun
-    ) {
-        return oduncService.kitapKirala(kullaniciId, kitapKopyaId, gun);
-    }
-
-    // 📌 Kitap iade
-    @PostMapping("/iade")
-    public Odunc iade(
-            @RequestParam Long oduncId,
-            @RequestParam double gunlukCeza
-    ) {
-        return oduncService.kitapIadeEt(oduncId, gunlukCeza);
-    }
-
-    // 📌 Kitap rezerve
     @PostMapping("/rezerve")
-    public Odunc rezerve(
+    public Odunc rezerve(RezerveRequest request) {
+        return oduncService.kitapRezervasyon(request.getKullaniciId(), request.getKitapKopyaId(), LocalDate.parse(request.getBaslangic()));
+    }
+
+    @PostMapping("/odunc-al")
+    public Odunc oduncAl(
             @RequestParam Long kullaniciId,
             @RequestParam Long kitapKopyaId
     ) {
-        return oduncService.kitapRezerveEt(kullaniciId, kitapKopyaId);
+        return oduncService.kitapOduncAl(kullaniciId, kitapKopyaId);
+    }
+
+    @PostMapping("/rezervden-odunc-al")
+    public Odunc rezervdenOduncAl(@RequestParam Long oduncId) {
+        return oduncService.rezervdenOduncAl(oduncId);
+    }
+
+    @PostMapping("/teslim")
+    public Odunc teslim(@RequestParam Long oduncId) {
+        return oduncService.kitapIadeEt(oduncId);
+    }
+
+
+    @PostMapping("/rezerve-iptal")
+    public Odunc rezerveIptal(@RequestParam Long oduncId) {
+        return oduncService.rezervIptalEt(oduncId);
     }
 }

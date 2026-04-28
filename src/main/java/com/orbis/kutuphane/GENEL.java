@@ -16,34 +16,12 @@ public class GENEL {
         }
     }
 
-    public enum KitapDurumu {
-        RAFTA(0),
-        ODUNC_VERILDI(1),
-        KAYIP(2);
-
-        private final int deger;
-
-        KitapDurumu(int deger) {
-            this.deger = deger;
-        }
-
-        public int getDeger() {
-            return deger;
-        }
-    }
     public enum OduncDurum {
         ODUNC_ALINDI,
         IADE_EDILDI,
         GECIKTI,
-        REZERVE
+        REZERVE,
+        REZERVE_IPTAL
     }
 
-
-    public enum KitapDurum {
-        MUSAIT,
-        ODUNCTE,
-        KAYIP,
-        HASARLI,
-        REZERVE
-    }
 }

@@ -17,14 +17,15 @@ public interface KitapRepo extends JpaRepository<Kitaplar, Long> {
     List<Kitaplar> filtreliKitaplar(@Param("ad") String ad,
                                   @Param("yazar") String yazar,
                                   @Param("yayinevi") String yayinevi);
-
+//todo buraya bakman lazım
     // Kütüphane bazlı envanter raporu (Müsait kitaplar gruplanmış)
     @Query("SELECT kk.kitap.ad as kitapAd, COUNT(kk) as adet FROM KitapKopya kk " +
-            "WHERE kk.sube.id = :subeId AND kk.durum = com.orbis.kutuphane.GENEL.KitapDurum.MUSAIT " +
+            "WHERE kk.sube.id = :subeId            " +
             "GROUP BY kk.kitap.ad")
     List<Map<String, Object>> findMusaitKitaplarRaporu(@Param("subeId") Long subeId);
 
-    // Ödünçte olan kitaplar raporu (Dönme tarihleri ile)
     @Query("SELECT o FROM Odunc o WHERE o.kitapKopya.sube.id = :subeId AND o.durum = com.orbis.kutuphane.GENEL.OduncDurum.ODUNC_ALINDI")
     List<Odunc> findOduncteOlanlarRaporu(@Param("subeId") Long subeId);
+    
+    List<Kitaplar> findBySubeId(Long subeId);
 }

@@ -17,12 +17,10 @@ public class Odunc {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Hangi kitap kopyası
     @ManyToOne
     @JoinColumn(name = "kitap_kopya_id", nullable = false)
     private KitapKopya kitapKopya;
 
-    // Hangi kullanıcı
     @ManyToOne
     @JoinColumn(name = "kullanici_id", nullable = false)
     private Kullanici kullanici;
@@ -34,7 +32,9 @@ public class Odunc {
     @Enumerated(EnumType.STRING)
     private GENEL.OduncDurum durum;
 
+    private Double normalUcret;
     private Double cezaTutari;
+    private Double toplamUcret;
 
 
 }
